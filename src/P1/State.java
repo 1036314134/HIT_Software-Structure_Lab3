@@ -1,16 +1,6 @@
 package P1;
 
 public class State {
-	// Abstraction function:
-	// 表示计划的状态
-	//
-	// Representation invariant:
-	// name记录状态名，不为空
-	//
-	// Safety from rep exposure:
-	// name是private的
-	//使用防御性拷贝
-	
 	private String name;
 	
 	//constructor

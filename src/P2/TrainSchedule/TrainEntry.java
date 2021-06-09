@@ -9,15 +9,6 @@ import P1.Time;
 import P1.Timeslot;
 
 public class TrainEntry extends PlanningEntryCollection<Train> {
-	// Abstraction function:
-	// 表示数趟火车路线，包含车厢、站点、时间段
-	
-	// Representation invariant:
-	// 一个路线可以有多个车厢、多个站点，但时间段数量比站点数量少一个
-	
-	// Safety from rep exposure:
-	// 所有域均为private final
-	// 使用防御性拷贝
 	
 	//constructor
 	private TrainEntry() {

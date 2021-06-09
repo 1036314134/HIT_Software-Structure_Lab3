@@ -1,16 +1,6 @@
 package P1;
 
 public class Timeslot {
-	// Abstraction function:
-	// 表示一个时间段
-	
-	// Representation invariant:
-	// begin记录开始时间
-	// end记录结束时间
-	
-	// Safety from rep exposure:
-	// 所有域均为private final
-	// 使用防御性拷贝
 	private Time begin;
 	private Time end;
 	
@@ -30,11 +20,11 @@ public class Timeslot {
 	
 	//methods
 	public Time getBegin() {
-		return Time.getNewTime(this.begin.toString());
+		return this.begin;
 	}
 
 	public Time getEnd() {
-		return Time.getNewTime(this.end.toString());
+		return this.end;
 	}
 
 	/**

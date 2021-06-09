@@ -6,20 +6,6 @@ import java.util.List;
 
 
 public class CommonPlanningEntry<R> implements PlanningEntry<R>{
-	//Abstraction function:
-	//表示一个计划，包含计划名称、资源、位置、时间段
-	
-	// Representation invariant:
-	// name用来记录计划名，不为空
-	// state用来记录计划状态
-	// timeslots记录项目所有的时间段
-	// locations记录项目所有位置
-	// resources记录项目所有资源
-	
-	// Safety from rep exposure:
-	// 除了state均为private final类型
-	// 使用防御性拷贝
-	
 	private final String name;
 	private State state;
 	private final List<Timeslot> timeslots;
@@ -88,12 +74,12 @@ public class CommonPlanningEntry<R> implements PlanningEntry<R>{
 	
 	@Override
 	public String getName() {
-		return new String(this.name);
+		return this.name;
 	}
 	
 	@Override
 	public State getState() {
-		return State.getNewState(this.state.getName());
+		return this.state;
 	}
 	
 	@Override

@@ -1,6 +1,8 @@
 package P2.FlightSchedule;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import P1.PlanningEntry;
@@ -26,6 +28,7 @@ public class FlightScheduleAPP {
 		}
 
 		System.out.println("请选择你要执行的操作");
+		System.out.println("0.增加一个有中转站的航程");
 		System.out.println("1.增加一架飞机");
 		System.out.println("2.移除一架飞机");
 		System.out.println("3.新增一个机场");
@@ -45,6 +48,26 @@ public class FlightScheduleAPP {
 
 		while (flag) {
 			switch (in.nextInt()) {
+				case 0:
+					System.out.println("请给出要增加的航班的信息");
+					System.out.println("该航班名称：");
+					String linename = in.next();
+					List<String> locations = new ArrayList<>();
+					List<String> times = new ArrayList<>();
+					System.out.println("请依次输入每个机场的名字");
+					for(int i = 0; i < 3; i++) {
+						locations.add(in.next());
+					}
+					System.out.println("请依次输入每两个机场之间时间段");
+					for(int i = 0; i < 4; i++) {
+						times.add(in.next() + " " + in.next());
+					}
+					if (lines.addPlan(linename, locations, times)) {
+						System.out.println("增加成功");
+					}else {
+						System.out.println("失败");
+					}
+					break;
 				case 1:
 					System.out.println("请给出你要添加的飞机的信息");
 					System.out.println("飞机名称 飞机种类 飞机座位数 飞机机龄");

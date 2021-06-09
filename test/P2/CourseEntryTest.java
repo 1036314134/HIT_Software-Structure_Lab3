@@ -39,6 +39,7 @@ public class CourseEntryTest {
 		
 		courses.addPlan(coursename1, locationname1, begintime1, endtime1);
 		assertEquals(courses.getPlan(coursename1).getLocations().get(0).getName(), locationname1);
+		assertEquals(courses.getPlan(coursename1).getState().getName(), "WAITING");
 		assertEquals(courses.changeclassroom(coursename1, locationname2), true);
 		assertEquals(courses.getPlan(coursename1).getLocations().get(0).getName(), locationname2);
 		

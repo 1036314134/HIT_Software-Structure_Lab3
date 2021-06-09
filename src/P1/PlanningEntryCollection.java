@@ -6,19 +6,6 @@ import java.util.List;
 
 
 public abstract class PlanningEntryCollection<R extends Resource> {
-
-	// Abstraction function:
-	// 表示一系列计划项组成的整体
-	//
-	// Representation invariant:
-	// resources记录所有资源
-	// locations记录所有位置
-	// plans记录所有计划项
-	//
-	// Safety from rep exposure:
-	// 所有域均为protected final
-	// 使用防御性拷贝
-	
 	protected final List<R> resources;
 	protected final List<Location> locations;
 	protected final List<PlanningEntry<R>> plans;
@@ -81,7 +68,7 @@ public abstract class PlanningEntryCollection<R extends Resource> {
 	 * @return 计划状态
 	 */
 	public State getState(String planname) {
-		return State.getNewState(this.getPlan(planname).getState().getName());
+		return this.getPlan(planname).getState();
 	}
 	
 	/**

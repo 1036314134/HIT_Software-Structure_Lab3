@@ -31,7 +31,7 @@ public class TrainBoard {
 		for (PlanningEntry<R> line: plans) {//µÖ´ï°à´Î
 			int max = line.getLocations().size();
 			int index = -1;
-			for(int i = 0; i < max; i++) {
+			for(int i = 1; i < max; i++) {
 				if(line.getLocations().get(i).getName().equals(location.getName())) {
 					index = i;
 					break;
@@ -85,14 +85,13 @@ public class TrainBoard {
 					break;
 				}
 			}
-			if(arrived) {
-				data[i][0] = String.format("%02d", lines.get(i).getTimeslots().get(index-1).getBegin().getHour()) + ":"
-						+ String.format("%02d", lines.get(i).getTimeslots().get(index-1).getBegin().getMinute());
+			if (arrived) {
+				data[i][0] = String.format("%02d", lines.get(i).getTimeslots().get(index-1).getEnd().getHour()) + ":"
+						+ String.format("%02d", lines.get(i).getTimeslots().get(index-1).getEnd().getMinute());
 			}else {
-				data[i][0] = String.format("%02d", lines.get(i).getTimeslots().get(0).getEnd().getHour()) + ":"
-					+ String.format("%02d", lines.get(i).getTimeslots().get(0).getEnd().getMinute());
+				data[i][0] = String.format("%02d", lines.get(i).getTimeslots().get(0).getBegin().getHour()) + ":"
+						+ String.format("%02d", lines.get(i).getTimeslots().get(0).getBegin().getMinute());
 			}
-			
 			
 			data[i][1] = "";
 			for(int j = 0; j < lines.get(i).getResources().size(); j++) {

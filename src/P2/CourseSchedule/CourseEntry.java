@@ -7,16 +7,6 @@ import P1.Time;
 import P1.Timeslot;
 
 public class CourseEntry extends PlanningEntryCollection<Teacher>{
-	// Abstraction function:
-	// 表示数节课，包含老师、教室、上课时间
-	
-	// Representation invariant:
-	// 一节课只有一个时间段和一个教室
-	
-	// Safety from rep exposure:
-	// 所有域均为private final
-	// 使用防御性拷贝
-	
 	//constructor
 	private CourseEntry() {
 		super();

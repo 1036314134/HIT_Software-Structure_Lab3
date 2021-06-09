@@ -3,16 +3,8 @@ package P1;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class Time{
-	// Abstraction function:
-	// 表示一个时间点
-	
-	// Representation invariant:
-	// year，month, day, hour, minute分别记录年、月、日、时、分
-	
-	// Safety from rep exposure:
-	// 所有域均为private final
-	// 使用防御性拷贝
 	private int year;
 	private int month;
 	private int day;

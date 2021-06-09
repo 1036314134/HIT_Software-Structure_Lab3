@@ -1,15 +1,6 @@
 package P1;
 
 public class Resource {
-	// Abstraction function:
-	// 表示一种资源
-
-	// Representation invariant:
-	// name记录资源名，不为空
-
-	// Safety from rep exposure:
-	// name 为 private final
-	// 使用防御性拷贝
 	private final String name;
 	
 	protected void checkRep() {

@@ -32,7 +32,14 @@ public class FlightBoard {
 				continue;
 			}
 			int max = line.getLocations().size();
-			if(line.getLocations().get(max-1).equals(location) == false) {
+			int index = -1;
+			for(int i = 1; i < max; i++) {
+				if(line.getLocations().get(i).getName().equals(location.getName())) {
+					index = i;
+					break;
+				}
+			}
+			if(index == -1) {//不抵达
 				continue;
 			}
 			
@@ -72,9 +79,16 @@ public class FlightBoard {
 
 		Object[][] data = new Object[lines.size()][4];
 		for (int i = 0; i < lines.size(); i++) {
+			int index = -1;
+			for(int j = 0; j < lines.get(i).getLocations().size(); j++) {
+				if(lines.get(i).getLocations().get(j).getName().equals(location.getName())) {
+					index = j;
+					break;
+				}
+			}
 			if (arrived) {
-				data[i][0] = String.format("%02d", lines.get(i).getTimeslots().get(0).getEnd().getHour()) + ":"
-						+ String.format("%02d", lines.get(i).getTimeslots().get(0).getEnd().getMinute());
+				data[i][0] = String.format("%02d", lines.get(i).getTimeslots().get(index-1).getEnd().getHour()) + ":"
+						+ String.format("%02d", lines.get(i).getTimeslots().get(index-1).getEnd().getMinute());
 			}else {
 				data[i][0] = String.format("%02d", lines.get(i).getTimeslots().get(0).getBegin().getHour()) + ":"
 						+ String.format("%02d", lines.get(i).getTimeslots().get(0).getBegin().getMinute());
@@ -98,8 +112,16 @@ public class FlightBoard {
 				lines.get(i).start();
 			}
 			
-			if(time.compareto(lines.get(i).getTimeslots().get(0).getEnd()) > 0) {
-				lines.get(i).complete();
+			if(index != 0) {
+				if(time.compareto(lines.get(i).getTimeslots().get(index-1).getEnd()) > 0) {
+					lines.get(i).complete();
+				}
+				for(int j = 0; j < lines.get(i).getTimeslots().size()-1; j++) {
+					if(time.compareto(lines.get(i).getTimeslots().get(j).getEnd()) > 0
+							&& time.compareto(lines.get(i).getTimeslots().get(j+1).getBegin()) < 0){
+						lines.get(i).block();
+					}
+				}
 			}
 			
 			if(lines.get(i).getState().getName().equals("ALLOCATED")) {
@@ -109,6 +131,10 @@ public class FlightBoard {
 			
 			if(lines.get(i).getState().getName().equals("RUNNING")) {
 				data[i][3] = "已起飞";
+				continue;
+			}
+			if(lines.get(i).getState().getName().equals("BLOCKED")) {
+				data[i][3] = "抵达经停机场";
 				continue;
 			}
 			if(lines.get(i).getState().getName().equals("ENDED")) {

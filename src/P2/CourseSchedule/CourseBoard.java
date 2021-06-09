@@ -54,8 +54,13 @@ public class CourseBoard {
 					+ String.format("%02d", courses.get(i).getTimeslots().get(0).getEnd().getMinute());
 
 			data[i][1] = courses.get(i).getName();
+			
+			data[i][2] = "";
+			for(int j = 0; j < courses.get(i).getResources().size(); j++) {
+				data[i][2] = data[i][2] + "  " + courses.get(i).getResources().get(j).getName();
+			}
 
-			data[i][2] = courses.get(i).getResources().get(0).getName();
+			
 			
 			if(courses.get(i).getState().getName().equals("CANCELLED")) {
 				data[i][3] = "ÒÑÈ¡Ïû";

@@ -1,5 +1,7 @@
 package P2.FlightSchedule;
 
+import java.util.List;
+
 import P1.Location;
 import P1.PlanningEntry;
 import P1.PlanningEntryCollection;
@@ -8,15 +10,6 @@ import P1.Timeslot;
 
 
 public class FlightEntry extends PlanningEntryCollection<Plane> {
-	// Abstraction function:
-	// 表示数个航班，包含飞机、起飞降落时间、起飞降落机场
-	
-	// Representation invariant:
-	// 一个航班只有一架飞机，两个机场和一个时间段
-	
-	// Safety from rep exposure:
-	// 所有域均为private final
-	// 使用防御性拷贝
 	
 	//constructor
 	private FlightEntry() {
@@ -75,6 +68,45 @@ public class FlightEntry extends PlanningEntryCollection<Plane> {
 		line.addTimeslot(timeslot);
 		this.plans.add(line);
 		
+		checkRep();
+		return true;
+	}
+	
+	/**
+	 * 添加一个计划
+	 * @param planname 计划名称
+	 * @param locations 所有站点名称的集合
+	 * @param times 所有时间的集合
+	 * @return 成功返回true, 失败返回false
+	 */
+	public boolean addPlan(String planname, List<String> locations, List<String> times) {
+		for(String l: locations) {//站点未加入
+			if (this.getLocation(l) == null) {
+				return false;
+			}
+		}
+		if (this.getPlan(planname) != null) {//路线已有
+			return false;
+		}
+		for(String t: times) {//时间输入格式不正确
+			if (Time.isLegalTime(t) == false) {
+				return false;
+			}
+		}
+		if((locations.size()- 1) * 2  != times.size()) {//时间与站点数目不一致
+			return false;
+		}
+		
+		PlanningEntry<Plane> line = PlanningEntry.getNewPlanningEntry(planname);
+		int max = locations.size();
+		for(int i = 0; i < max; i++) {
+			line.addLocation(Location.getNewLocation(locations.get(i)));
+		}
+		for(int i = 0; i < 2*(max-1); i+= 2) {
+			Timeslot timeslot = Timeslot.getNewTimeslot(times.get(i), times.get(i+1));
+			line.addTimeslot(timeslot);
+		}
+		this.plans.add(line);
 		checkRep();
 		return true;
 	}

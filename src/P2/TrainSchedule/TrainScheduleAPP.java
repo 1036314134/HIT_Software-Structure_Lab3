@@ -109,7 +109,13 @@ public class TrainScheduleAPP {
 				break;
 			case 6:
 				System.out.println("请给出要取消的路线名称");
-				if (lines.cancel(in.next())) {
+				System.out.println("请给出要取消的路线名称");
+				String line = in.next();
+				if(lines.getPlan(line).getResources().isEmpty() == false) {
+					System.out.println("已被分配车厢资源，不能取消");
+					break;
+				}
+				if (lines.cancel(line)) {
 					System.out.println("取消成功");
 				}else {
 					System.out.println("失败");
