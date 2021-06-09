@@ -1,0 +1,27 @@
+train
+1
+A A 100 2000
+1
+B A 100 2000
+3
+nantong
+3
+wuhu
+3
+harbin
+5
+qifei
+3
+nantong harbin wuhu
+2020-01-01 18:00
+2020-01-01 18:30
+2020-01-01 18:40
+2020-01-01 19:00
+7
+A qifei
+7
+B qifei
+11
+2020-01-01 18:50 wuhu
+11
+2020-01-01 18:35 wuhu
